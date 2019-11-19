@@ -1,0 +1,84 @@
+{
+"$schema": "https://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+"contentVersion": "1.0.0.0",
+"parameters": {
+    "workspaceName": {
+        "type": "String",
+        "metadata": {
+          "description": "Specifies the name of the workspace."
+        }
+    },
+        "CostCenterTag": { 
+            "type": "string",
+            "defaultValue" : "1234"
+        },
+        "ProductTag": { 
+            "type": "string",
+            "defaultValue" : "BTIS"
+        },
+        "ApplicationTag": { 
+            "type": "string",
+            "defaultValue" : "demoapp"
+        },
+        "EnvironmentTag": { 
+            "type": "string",
+            "defaultValue" : "QA"
+        },
+        "HoursOfOperationsTag": { 
+            "type": "string",
+            "defaultValue" : "24x7"
+        },    
+    "location": {
+        "type": "String",
+        "allowedValues": [
+          "australiacentral", 
+          "australiaeast", 
+          "australiasoutheast", 
+          "brazilsouth",
+          "canadacentral", 
+          "centralindia", 
+          "centralus", 
+          "eastasia", 
+          "eastus", 
+          "eastus2", 
+          "francecentral", 
+          "japaneast", 
+          "koreacentral", 
+          "northcentralus", 
+          "northeurope", 
+          "southafricanorth", 
+          "southcentralus", 
+          "southeastasia", 
+          "uksouth", 
+          "ukwest", 
+          "westcentralus", 
+          "westeurope", 
+          "westus", 
+          "westus2" 
+        ],
+        "metadata": {
+          "description": "Specifies the location in which to create the workspace."
+        }
+    }
+},
+"resources": [
+    {
+        "type": "Microsoft.OperationalInsights/workspaces",
+        "name": "[parameters('workspaceName')]",
+        "apiVersion": "2015-11-01-preview",
+        "location": "[parameters('location')]",
+        "tags": { 
+            "CostCenter": "[parameters('CostCenterTag')]", 
+            "Product": "[parameters('ProductTag')]", 
+            "Application": "[parameters('ApplicationTag')]", 
+            "Environment": "[parameters('EnvironmentTag')]", 
+            "HoursOfOperations": "[parameters('HoursOfOperationsTag')]"
+        },            
+        "properties": {
+            "features": {
+                "searchVersion": 1
+            }
+        }
+      }
+   ]
+}

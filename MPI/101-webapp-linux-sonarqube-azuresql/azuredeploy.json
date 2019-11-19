@@ -4,7 +4,6 @@
     "parameters": {
       "siteName": {
         "type": "string",
-//        "defaultValue": "azapp-demoapp-qa-001",
         "defaultValue": "[concat('azapp-demoapp-qa-001', substring(uniqueString(resourceGroup().id),0,6))]",
         "metadata": {
           "description": "Demo web app with sonarqube"
